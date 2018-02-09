@@ -1,0 +1,9 @@
+一，垃圾回收器；
+二，finalize();
+三，finally{};
+    自己编写清理方法，最后放在
+    try{
+    }finally{
+    }
+    中的finally中
+    
