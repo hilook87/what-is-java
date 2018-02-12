@@ -1,0 +1,8 @@
+编码问题：p153,练习2，
+——》
+1，Shapes.java 中为什么要加入：
+    package polymorphism;
+    import polymorphism.shape.*;
+2，Shape.java 中为什么要加入：
+    个package才能整个文件不报错？
+
