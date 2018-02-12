@@ -1,7 +1,7 @@
 protected
   1，可以在另一个包中通过继承的方式访问它；
   2，向上转型
-    p140,练习17：
+    p140,练习17，Frog17.java
     class Amphibian {
 	      void eat() {
 		      System.out.println("Amphibian eat");
