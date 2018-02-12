@@ -32,4 +32,4 @@ protected
   Frog grow
   Frog eat
   Amphibian grow
-  Frog eat   ---  ？？？
+  Frog eat   ---  ？？？  ——》可能是因为多态。。。
