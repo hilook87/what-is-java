@@ -1,0 +1,9 @@
+一，如果成员对象中存在于其它一个或多个对象共享的情况；
+   就必需使用引用计数来跟踪仍旧访问着共享对象的对象数量。
+p161-162
+private static long counter = 0;
+private final long id = counter++;
+private int refcount = 0;
+
+
+
