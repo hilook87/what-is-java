@@ -20,6 +20,7 @@ Java会自动在导出类的构造器中插入对基类构造器的调用；
 “为新的类提供方法”并不是继承技术中最重要的方面，
 其最重要的方面是用来“表现新类和基类之间的关系”。
 
+
 向上转型：Instrument i = new Wind();
 public static void tune(Instrument i){
     //...
@@ -39,6 +40,21 @@ Wind.play() MIDDLE_C
 通过看p153页的练习3，如果导出类中没有覆写方法，将会使用基类方法；
 |
 注意：针对基类中的私有方法，域（数据），静态方法不具有多态性。
+
+
+向下转型（运行时类型识别）(RTTI)
+p167
+Useful[] x = {
+    new Useful(),
+    new MoreUseful()
+};
+x[1].u(); - Error,Compile time:method not found in Useful
+((MoreUseful)x[1]).u(); //向下转型
+((MoreUseful)x[0]).u(); //Exception thrown
+
+
+
+
 
 
 
