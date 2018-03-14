@@ -25,6 +25,8 @@ interface关键字产生一个完全抽象的类，它根本就没有提供任�
 要让一个类遵循某个特定接口（或者是一组接口），需要使用implements关键字，它表示：
 interface只是它的外貌，但是现在我要声明它是如何工作的。除此之外，它看起来还很像继承。
 
+可以在interface前面添加public,如果不添加public,则它只具有包访问权限。接口也可以包含域，但是这些域都是static和final的。
+
 在实现interface中的方法都是public的（即在implements中）。
 
 
