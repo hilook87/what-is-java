@@ -4,6 +4,52 @@ p161-162
 private static long counter = 0;
 private final long id = counter++;
 private int refcount = 0;
+|
+基础概念（看的时候觉得简单。。。其实压根可能也没太看懂，且看过就会忘。。。）；
 
+二，接口（策略设计模式+适配器设计模式）
+p175-178
+我觉得大概的逻辑是这样的：
+class Processor{
+   public String name(){
+      return getClass().getSimpleName();
+   }
+   Object process(Object input){return input;}
+}
+|
+策略设计模式:
+public class Apply{
+	public static void process(Processor p,Object s){
+		System.out.println("Using Processor " + p.name());
+		System.out.println(p.process(s));
+	}
+}
+|
+但是Processor和Apply.process()方法之间的耦合过紧。。。
+采用接口，将耦合变松动：
+public interface Processor {
+	String name();
+	Object process(Object input);
+}
+适配器设计模式：
+class StringMixerAdapter implements Processor {
+	StringMixer stringMixer;
+	public StringMixerAdapter(StringMixer stringMixer) {
+		this.stringMixer = stringMixer;
+	}
+   public String name() { return "StringMixerAdapter"; }
+	public String process(Object input) {
+		return stringMixer.process((String)input);
+	}	
+}
+public class StringMixerProcessor {
+	public static void main(String[] args) {
+	//	String s = new String(args[0]);
+		String s = "at interfaces.interfaceprocessor.StringMixerProcessor.main";
+		Apply.process(new StringMixerAdapter(new StringMixer()), s);
+	}
+}
+|
+这个东东其实。。。我可能又是先预设的想太多了。。。（不用管其中的“代理”）
 
 
