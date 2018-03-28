@@ -37,7 +37,7 @@ class StringMixerAdapter implements Processor {
 	public StringMixerAdapter(StringMixer stringMixer) {
 		this.stringMixer = stringMixer;
 	}
-   public String name() { return "StringMixerAdapter"; }
+   	public String name() { return "StringMixerAdapter"; }
 	public String process(Object input) {
 		return stringMixer.process((String)input);
 	}	
@@ -55,6 +55,41 @@ public class StringMixerProcessor {
 三，能用private的，就用private；
 p187,P200;
 工厂方法设计模式 VS 匿名内部类；
+
+四，为什么需要内部类
+p204-211
+使用内部类最吸引人的原因是：
+每个内部类都能独立地继承自一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响；
+且内部类允许继承多个非接口类型（类或抽象类）；
+|
+1，
+例如：内部类与控制框架。——》第18章，将会看到内部类如何优雅地描述图形用户界面的行为；
+例子：控制温室的运作：控制灯光、水、温度调节器的开关、以及响铃和重新启动系统。
+对于温室系统的每一种行为，都继承一个新的Event内部类，并在要实现的action()中编写控制代码。
+2，
+例如：闭包与回调。
+例子：
+如果Callee2继承了MyIncrement，就不能为了Increment的用途而覆盖increment()方法，于是只能使用内部类独立地实现Increment。
+且可以控制该内部类为private，通过返回内部类引用调取；
+|
+回调的价值在于它的灵活性——可以在运行时动态地决定需要调用什么方法。——》第22章，这章里实现GUI功能的时候，到处都用到了回调；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
