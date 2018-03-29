@@ -23,4 +23,49 @@
 多层内部类(p203)；
 
 
+内部类的继承:
+需要使用一些特殊的语法对其构造器初始化：
+class WithInner{
+  class Inner{}
+}
+public class InheritInner extends WithInner.Inner{
+  //! InheritInner(){}   //Won't compile
+  InheritInner(WithInner wi){
+    wi.super();
+  }
+  public static void main(String[] args){
+    WithInner wi = new WithInner();
+    InheritInner ii = new InheritInner(wi);
+  }
+}
+
+
+内部类的覆盖：
+1，“覆盖”内部类就好像它是外围类的一个方法，其实并不起什么作用；
+2，当然明确地继承某个内部类也是可以的；
+   public class Yolk extends Egg2.Yolk{}
+
+
+局部内部类：
+不能有访问说明符，因为它不是外围类的一部分；但是它可以访问当年代码块内的常量，以及此外围类的所有成员；
+局部内部类 VS 匿名内部类
+这两者都是在方法体中定义；
+局部内部类中可以有构造器，匿名内部类中不能有构造器（只能有{}）
+使用局部内部类而不是匿名内部类的唯一理由是：我们需要一个已命名的构造器或者需要重载构造器，而匿名内部类只能用于实例初始化；——》需要不止一个该内部类的对象；
+
+
+内部类标识符：
+内部类生成的class文件名字，例如，匿名内部类：LocalInnerClass$1.class《——编译器会简单的产生一个数字作为其标识符，加在$后面；
+
+
+
+
+
+
+
+
+
+
+
+
 
