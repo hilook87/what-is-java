@@ -29,6 +29,58 @@ ArrayList<Apple> apples = new ArrayList<Apple>();
 可以防止将Orange放置到apples中，因此变成了一个编译器错误，而不再是运行时错误；
 同时向上转型也可以像作用于其它类型一样作用于泛型；
 
+11.2基本概念：
+
+Java容器类类库可以划分两个基本概念：
+1，独立元素序列(Collection):List,Set,Queue;
+2，“键值对”对象(Map):Map;
+|
+你编写的大部分代码都是在与这些接口打交道。
+|
+使用接口，向上转型：
+List<Apple> apples = new ArrayList<Apple>();
+List<Apple> apples = new LinkedList<Apple>();
+但例如如果需要LinkedList中额外的功能，就不能这么写了；
+
+Collection接口：
+Collection<Integer> c = new ArrayList<Integer>();
+
+
+11.3添加一组元素：
+
+Arrays类和Collections类;——》连着看下面的例子然后再看前面的概念介绍，才发现说的真是言简意赅的感觉；
+|
+Arrays.asList():接受一个数组或是一个用逗号分隔的元素列表；
+Collections.addAll():接受一个Collection对象,以及一个数组或是一个用逗号分隔的元素列表；
+|
+Collection.addAll()方法运行起来要快的多，而且构建一个不包含元素的Collection，然后调用Collections.addAll()这种方式很方便，因此它是首选方式；
+例：
+Collection<Integer> collection = new ArrayList<Integer>();
+Collections.addAll(collection,1,2,3,4,5,6);
+
+注意：
+可以直接使用Arrays.asList()的输出，将其当作List；(p221)
+但是，其底层表示的是数组，因此不能调整尺寸，而且其对所产生的List类型做出了最理想的假设；
+|
+List<Snow> snow = Arrays.asList();
+
+
+11.4 容器的打印：
+
+你必须使用Arrays.toString()来产生数组的可打印表示，但是打印容器无需任何帮助（其默认的打印行为是使用容器提供的toString()方法）；
+|
+System.out.println(collection);
+
+再大概说明了下Java容器类库的主要类型：（p222-223）
+List:特定的顺序保存一组元素；LinkedList包含的操作多于多于ArrayList,这两个均是按插入的顺序保存元素;
+Set:元素不能重复；HashSet,TreeSet,LinkedHashSet;
+Queue:只允许在容器的一“端”插入对象，并从另一“端”移除对象;HashMap,TreeMap,LinkedHashMap;
+
+
+
+
+
+
 
 
 
