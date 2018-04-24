@@ -140,6 +140,22 @@ Set中最常用被使用的是测试归属性，你可以很容易的询问某�
 |
 例子：
 Set<Integer> intset = new HashSet<Integer>();
+|
+例子：如果想对结果排序：可以用TreeSet代替HashSet:
+SortedSet<Integer> intset = new TreeSet<Integer>();
+|
+例子：或者，如果按字母序排序，可以向TreeSet的构造器传入String.CASE_INSENTIVE_ORDER：
+Set<String> words = new TreeSet<String>(String.CASE_INSENTIVE_ORDER);
+|
+这里最常见的操作之一，就是使用contains()测试Set的归属性：
+set1.contains("H");
+set1.containsAll(set2);
+
+
+
+
+
+
 
 
 
