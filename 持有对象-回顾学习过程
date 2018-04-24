@@ -99,10 +99,47 @@ ArrayList,LinkedList
 4）使用remove()将迭代器新近返回的元素删除；
 |
 例子：
+List<Pet> pets = Pets.arrayList(12);
+Iterator<Pet> it = pets.iterator();
+while(it.hasNext()){
+  Pet p = it.next();
+  System.out.println(p.id()+":"+p)
+}
+it = pets.iterator();
+for(i = 0;i<6;i++){
+  it.next();
+  it.remove();
+}
+|
+11.6.1 ListIterator
+ListIterator是一个更强大的Iterator的子类型，它只能用于各种List类的访问；
+可以向前移动，可以向后移动，返回当前位置的前一个和后一个元素的索引，还可以替换元素；
+还可以通过listIterator(n)方法创建一个一开始就指向列表索引为n的元素处的ListIterator;
+|
+例子：
+List<Pet> pets = Pets.arrayList(12);
+ListIterator<Pet> it = pets.listIterator();
+
+11.7 LinkedList
+LinkedList还添加了可以使其用作栈，队列或双端队列的方法；
+（p228-229）
 
 
+11.8 Stack
+“栈”通常是指“后进先出”的容器；
+LinkedList具有能够直接实现栈的所有功能的方法，因此可以直接将LinkedList作为栈使用；
+不过，有时一个真正的“栈”更能把事情说清楚；
+（p230）
 
 
+11.9 Set
+Set具有与Collection完全一样的接口，只是行为不同；
+Set不保存重复的元素；
+Set中最常用被使用的是测试归属性，你可以很容易的询问某个对象是否在某个Set中，
+因此通常会选择HashSet的实现，它专门对快速查找进行了优化。
+|
+例子：
+Set<Integer> intset = new HashSet<Integer>();
 
 
 
