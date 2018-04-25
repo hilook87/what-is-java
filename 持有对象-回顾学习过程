@@ -74,7 +74,8 @@ System.out.println(collection);
 再大概说明了下Java容器类库的主要类型：（p222-223）
 List:特定的顺序保存一组元素；LinkedList包含的操作多于多于ArrayList,这两个均是按插入的顺序保存元素;
 Set:元素不能重复；HashSet,TreeSet,LinkedHashSet;
-Queue:只允许在容器的一“端”插入对象，并从另一“端”移除对象;HashMap,TreeMap,LinkedHashMap;
+Queue:只允许在容器的一“端”插入对象，并从另一“端”移除对象;
+Map：在每个槽内保存了两个对象，即健和与之相关联的值；HashMap,TreeMap,LinkedHashMap;
 
 
 11.5 List
@@ -130,6 +131,12 @@ LinkedList还添加了可以使其用作栈，队列或双端队列的方法；
 LinkedList具有能够直接实现栈的所有功能的方法，因此可以直接将LinkedList作为栈使用；
 不过，有时一个真正的“栈”更能把事情说清楚；
 （p230）
+|
+返回列表的第一个元素：getFirst(),element(),peek();
+移除并返回列表的第一个元素：removeFirst(),remove(),poll();
+移除并返回列表的最后一个元素：removeLast();
+插入列表的顶端：addFirst();
+插入列表的最后：add(),addLast(),offer();
 
 
 11.9 Set
@@ -150,6 +157,71 @@ Set<String> words = new TreeSet<String>(String.CASE_INSENTIVE_ORDER);
 这里最常见的操作之一，就是使用contains()测试Set的归属性：
 set1.contains("H");
 set1.containsAll(set2);
+
+11.10 Map
+提供了一种将对象映射到其他对象的能力；
+|
+例：统计Random产生的的数字分布：
+Map<Integer,Integer> m = new HashMap<Integer,Integer>();
+for(int i = 0;i < 10000; i++){
+  int r = rand.nextInt(20);
+  Integer freq = m.get(r);
+  m.put(r,freq == null ? 1 : freq + 1);
+}
+例：查看是否包含某个键或某个值：m.containsKey("My Dog");m.containsKey(dog);
+|
+Map可以很容易的扩展到多维，这些Map的值可以是其它容器，甚至是其它Map，从而快速的生成强大的数据结构；
+|
+例：假设你正在跟踪拥有多个宠物的人，Map<Person,List<Pet>>;
+Map<Person,List<? extends Pet>> petPeople = new HashMap<Person,List<? extends Pet>>();
+petPeople.put(new Person("Dawn"),
+  Arrays.asList(new Cymric("Molly"),new Mutt("Spot")));
+获取所有键：petPeople.keySet();-显示是数组形式；
+获取所有值：petPeople.values();-显示是数组形式；
+获取具体某个键下的所有值：
+for(Person person :  petPeople.keySet()){
+  print(person + "has:" );
+  for(Pet pet : petPeople.get(person) ){
+    print(" " + pet);
+  }
+}
+
+11.11 Queue
+“队列”是典型的“先进先出”的容器；
+LinkedList提供了方法以支持队列的行为，并且它实现了Queue接口，因此LinkedList可以用作Queue的一种实现；
+通过将LinkedList向上转型为Queue；
+|
+例：
+Queue<Integer> queue = new LinkedList<Integer>();
+
+11.11.1 PriorityQueue
+优先级队列声明下一个弹出元素是最需要的元素；
+当你在PriorityQueue上调用offer()方法来插入一个对象时，可以通过提供自己的Comparator来修改这个顺序；
+然后，PriorityQueue可以确保当你调用peek()、poll()和remove()方法时，获取的元素将是队列中优先级最高的元素；
+|
+例：
+PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
+List<Integer> ints = Arrays.asList(1,2,3,4,5,56,6,7,8,0,9);
+priorityQueue = new PriorityQueue<Integer>(ints.size(),Collections.reverseOrder());
+|
+Integer、String和Character可以与PriorityQueue一起工作，因为这些类已经内建了自然顺序。
+如果你想在PriorityQueue中使用自己的类，就必须包含额外的功能以产生自然排序，或者必须提供自己的Comparator（在第17章中会演示这种情况）。
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
