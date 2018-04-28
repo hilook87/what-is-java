@@ -207,11 +207,93 @@ priorityQueue = new PriorityQueue<Integer>(ints.size(),Collections.reverseOrder(
 Integer、String和Character可以与PriorityQueue一起工作，因为这些类已经内建了自然顺序。
 如果你想在PriorityQueue中使用自己的类，就必须包含额外的功能以产生自然排序，或者必须提供自己的Comparator（在第17章中会演示这种情况）。
   
+  
+11.12 Collection和Iterator
+Collection是描述所有序列容器的共性的根接口；
+另外，java.util.AbstractCollection类提供了Collection的默认实现；
+在C++中，使用迭代器而不是Collection来表示容器之间的共性；
+在Java中，这两种方法绑定到了一起，因为实现Collection就意味着需要提供iterator()方法。
+|
+当要实现一个不是Collection的外部类时；
+1，如果需要使用Collection的话，继承AbstractCollection类，然后实现size()和iterator()方法；
+2，直接实现Iterator<>接口的iterator()方法；《——其实再仔细高级的思考一下，应该能想到啊。。。可以看看这个例子是怎么具体写代码的，
+                                             当时脑子里有飘过这个想法，但是不知道怎么具体写这个代码；
 
 
+11.13 Foreach与迭代器
+foreach语法主要用于数组，但是它也可以应用于任何Collection对象。
+Collection<String> cs = new LinkedList<String>();
+for(String s : cs){
+  System.out.println(s);
+}
+|
+由于Java SE5引入了新的被称为Iterable的接口（在java.lang中），该接口包含一个能够产生Iterator的iterator()方法，
+并且Iterable接口被foreach用来在序列中移动；
+||
+因此如果你创建了任何实现Iterable的类，都可以将它用于foreach语句中;
+public class IterableClass implements Iterable<String>{
+  //数据成员
+  protected String[] words = ...;
+  //实现Iterable
+  puble Iterator<String> iterator(){
+    return new Iterator<String>(){
+      private int index = 0;
+      public boolean hasNext(){
+        return index < words.length;
+      }
+      publec String next(){
+        return words[index++];
+      }
+      publict void remove(){
+        ......
+      }
+    };
+  }
+}
+|
+大量的类都是Iterable类型，主要包括所有的Collection类（但是不包括各种Map）;
+Iterable<T> ib = Arrays.asList(1,2,3);
+||
+例子：
+static <T> void test(Iterable<T> ib){
+  for(T t : ib){
+    System.out.println(t);
+  }
+}
+...
+test(Arrays.asList(1,2,3));
 
-
-
+11.13.1 适配器方法惯用法
+|
+如果现有一个Iterable类，你想要添加一种或多种在foreach语句中使用这个类的方法，该怎么做呢？
+|
+一种解决方案是：适配器方法惯用法；“适配器”部分来自于设计模式，因为你必须提供特定接口以满足foreach语句。
+              当你有一个接口并需要另一个接口时，编写适配器就可以解决问题；
+||
+例如：希望在默认的前向迭代器的基础上，添加产生反向迭代器的能力，因此不能使用覆盖，
+而是添加一个能产生Iterable对象的方法，该对象可以用于foreach语句；
+|||
+class ReversibleArrayList<T> extends ArrayList<T>{
+  ......
+  puble Iterable<T> reversed(){
+    return new Iterable<T>(){
+      public Iterator<T> interator(){
+        return new Iterator<T>(){
+          int current = size() - 1;
+          public boolean hasNext(){
+            return current > -1;
+          }
+          publec String next(){
+            return get(current--);
+          }
+          publict void remove(){
+            ......
+          }
+        };
+      }
+    };
+  }
+}
 
 
 
