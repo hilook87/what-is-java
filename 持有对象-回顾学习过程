@@ -275,7 +275,7 @@ test(Arrays.asList(1,2,3));
 |||
 class ReversibleArrayList<T> extends ArrayList<T>{
   ......
-  puble Iterable<T> reversed(){
+  public Iterable<T> reversed(){
     return new Iterable<T>(){
       public Iterator<T> interator(){
         return new Iterator<T>(){
@@ -294,8 +294,16 @@ class ReversibleArrayList<T> extends ArrayList<T>{
     };
   }
 }
-
-
+|||
+还可以这样：
+public Iterable<T> reversed(){
+    return new Iterable<T>(){
+      public Iterator<T> interator(){
+        List<String> shuffled = new ArrayList<String>(...);
+        return shuffled.iterator();
+      }
+    };
+}    
 
 
 
