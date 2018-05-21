@@ -67,7 +67,12 @@ Throw SimpleException from f()
 Caurht it!
 
 
-
+自己总结的：
+|
+try,catch的执行顺序：
+1,try里的东东；
+2，异常类的构造器；
+3，throw new里的东东；
 
 
 
