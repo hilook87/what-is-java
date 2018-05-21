@@ -1,0 +1,77 @@
+基本语法
+
+异常：指在当前环境下无法获得必要的信息来解决问题；你所能做的就是从当前环境跳出，并且把问题提交给上一级环境；
+|
+做法：抛出异常，而不是顺着原来的路径继续执行下去；
+|
+代码（示例）：
+if(t == null)
+  throw new NullPointerException();
+说明：抛出异常后，首先，使用new在堆上创建异常对象；
+                然后，当前的执行路径被终止，并且从当前环境中弹出对异常对象的引用，此时，异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序，
+                这个恰当的地方就是“异常处理程序”，它的任务是将程序从错误状态中恢复，以使程序能要么换一种方式运行，要么继续运行下去；
+
+
+标准异常类
+|
+有两个构造器：一个是默认构造器；另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器；
+throw new NullPointerException(“t = null”);
+
+Throwable对象（异常类型的根类；）
+|
+Throwable 类是 Java 语言中所有错误或异常的超类。只有当对象是此类（或其子类之一）的实例时，才能通过 Java 虚拟机或者 Java throw 语句抛出。
+类似地，只有此类或其子类之一才可以是 catch 子句中的参数类型。
+两个子类的实例，Error 和 Exception，通常用于指示发生了异常情况。
+通常，这些实例是在异常情况的上下文中新近创建的，因此包含了相关的信息（比如堆栈跟踪数据）。
+
+
+捕获异常
+|
+try块（抛出异常后程序就结束了，但可以放在try块里捕获这个异常），异常处理程序（catch,跟在try块之后，且只有匹配的catch子句才能得到执行）
+
+异常处理理论上有两种基本模型
+|
+“终止模型”和“恢复模型”
+|
+Java支持“终止模型”，一旦异常被抛出，就表明错误已经无法挽回，也不能回来继续执行；
+“恢复模型”，可以把try块放在while循环里，这样就不断地进入try块，直到得到满意的结果；
+
+
+创建自定义异常
+|
+不必拘泥于Java中已有的异常类型；
+要自己定义异常类，必须从已有的异常类继承；
+建立新的异常类型最简单的方法就是让编译器为你产生默认构造器；
+|
+代码示例：
+1,
+class SimpleException extends Exception{}
+2,
+public class InheritingExceptions {
+  public void f() throws SimpleException{
+    System.out.println("Throw SimpleException from f()");
+    throw new SimpleException();
+  }
+}
+3,
+public static void main(String[] args){
+  InheritingExceptions sed = new InheritingExceptions();
+  try{
+    sed.f()
+  }catch(SimpleException e){
+    System.out.println("Caurht it!");
+  }
+}
+输出结果：
+Throw SimpleException from f()
+Caurht it!
+
+
+
+
+
+
+
+
+
+
